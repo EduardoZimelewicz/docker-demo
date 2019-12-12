@@ -12,6 +12,11 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag eduardozime/spinnaker-node-demo
+    
+    - name: Login to Docker hub
+      env:
+        DOCKER_HUB_PASS: ${{ secrets.docker_hub_pass }}
+      run: docker login --username eduardozime --password $DOCKER_HUB_PASS
       
     - name: Push the Docker image
       run: docker push eduardozime/spinnaker-node-demo
